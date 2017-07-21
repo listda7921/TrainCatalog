@@ -32,11 +32,12 @@ app.get('/db', function (request, response) {
       if (err)
        { console.error(err); response.send("Error " + err); }
       else{
-      result.forEach(function(r){
-        if(r.url  == "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg"){
-          data = base64_encode("/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
-        }
-      })
+      // result.forEach(function(r){
+      //   if(r.url  == "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg"){
+      //     data = base64_encode("/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
+      //   }
+      // })
+      data = base64_encode("/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
       response.render('pages/db', {results: data} ); 
       }
        
