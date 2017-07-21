@@ -39,7 +39,7 @@ app.get('/db', function (request, response) {
       //     data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
       //   }
       // })
-      if(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg"){
+      if(1 == 2){
       var data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
       //console.log(data);
       response.render('pages/db', {results: data }); 
