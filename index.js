@@ -30,7 +30,7 @@ app.get('/db', function (request, response) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     client.query('SELECT * FROM image_locations', function(err, result) {
       done();
-      var data;
+      //var data;
       if (err)
        { console.error(err); response.send("Error " + err); }
       else{
@@ -39,9 +39,11 @@ app.get('/db', function (request, response) {
       //     data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
       //   }
       // })
-      data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
-      console.log(data);
+      if(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg"){
+      var data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
+      //console.log(data);
       response.render('pages/db', {results: data }); 
+      }else{response.render('pages/db', {results: "error" });}
       }
        
     });
