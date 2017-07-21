@@ -81,7 +81,7 @@ app.get('/db', function (request, response) {
         var res = result.rows;
         files.forEach(function(file){
           res.forEach(function(r){
-            if(r.url == '/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg'){
+            if(r == '/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg'){
               console.log('/img/' + file);
               data = base64_encode(__dirname + '/img/' + file);
               console.log(data);
