@@ -96,7 +96,7 @@ app.get('/db', function (request, response) {
       
       
         //data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
-        response.render('pages/db', {base64: data , results: result});
+        response.render('pages/db', {base64: data , results: result.rows});
     }
   });
 });
