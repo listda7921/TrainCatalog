@@ -44,8 +44,8 @@ app.get('/db', function (request, response) {
       //console.log(data);
       response.render('pages/db', {results: data }); 
       }else{
-         response.render('pages/db', {results: result.rows });
-        //response.render('pages/db', {base64: ["string from db","string 2 from db"] });
+         //response.render('pages/db', {results: result.rows });
+        response.render('pages/db', {base64: "string from db" });
         
       }
       }
