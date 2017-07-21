@@ -12,7 +12,10 @@
   "dependencies": {
     "ejs": "2.5.6",
     "express": "4.15.2",
-    "pg": "7.0.1"
+    "pg": "7.0.1",
+    "uuid": "^3.1.0",
+    "body-parser": "^1.17.2",
+    "fs": "0.0.1-security"
   },
   "repository": {
     "type": "git",
