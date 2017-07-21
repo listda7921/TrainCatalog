@@ -43,7 +43,7 @@ app.get('/db', function (request, response) {
       var data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
       //console.log(data);
       response.render('pages/db', {results: data }); 
-      }else{response.render('pages/db', {results: "error" });}
+      }else{response.render('pages/db', {results: result.rows });}
       }
        
     });
