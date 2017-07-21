@@ -43,6 +43,16 @@ app.post('/api/Upload', function(req, res){
   fs.writeFile(__dirname + path, img.data, function(err) {
     console.log(err);
   });
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('INSERT INTO image_locations(url) VALUES(' + path + ')', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); res.send("Error " + err); }
+    });
+    if(err){
+      console.log(err);
+    }
+  });
   res.send("ok");
 })
 
