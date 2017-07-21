@@ -73,30 +73,30 @@ app.get('/db', function (request, response) {
       
       
       //test
-      fs.readdir(__dirname + '/img', function( err, files ) {
-       if(err){
-         console.log(err);
-       }
-       else{
-         files.forEach(function(file){
-           result.rows.forEach(function(r){
-            if(r.url == '/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg'){
-              console.log('/img/' + file);
-              data = base64_encode(__dirname + '/img/' + file);
-              console.log(data);
-            }  
-           })
+      // fs.readdir(__dirname + '/img', function( err, files ) {
+      // if(err){
+      //   console.log(err);
+      // }
+      // else{
+      //   files.forEach(function(file){
+      //     result.forEach(function(r){
+      //       if(r.url == '/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg'){
+      //         console.log('/img/' + file);
+      //         data = base64_encode(__dirname + '/img/' + file);
+      //         console.log(data);
+      //       }  
+      //     })
            
           
-         })
+      //   })
          
-       }
+      // }
          
-       });
+      // });
       
       
         //data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
-        response.render('pages/db', {base64: data });
+        response.render('pages/db', {base64: data , results: result});
     }
   });
 });
