@@ -10,7 +10,12 @@
 
 <div class="container">
 <h2>Database Results</h2>
- <img src="<%='data:image/jpeg;base64,'+ base64%>" height="300"/>
+ <ul>
+      <% base64Array.forEach(function(r) { %>
+        <li><img src="<%= 'data:image/jpeg;base64,'+ r %>" height="300"/></li>
+    <% }); %>
+ </ul>
+ <p>images</p>
 </div>
 
 </body>

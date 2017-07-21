@@ -31,27 +31,43 @@ app.get('/db', function (request, response) {
     client.query('SELECT * FROM image_locations', function(err, result) {
       done();
       var data;
+      var results = [];
       if (err)
        { console.error(err); response.send("Error " + err); }
       else{
-      // result.forEach(function(r){
-      //   if(r.url  == "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg"){
-      //     data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
-      //   }
-      // })
-      if(1 == 2){
-      data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
-      //console.log(data);
-      response.render('pages/db', {results: data }); 
-      }else{
-         //response.render('pages/db', {results: result.rows });
-          data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
-        response.render('pages/db', {base64: data });
+        fs.readdir(__dirname + '/img', function( err, files ) {
+          if( err ) {
+              console.error( "Could not list the directory.", err );
+              process.exit( 1 );
+          } 
+          else{
+          files.forEach( function( file, index ) {
+            result.forEach(function(r){
+              if(r.url  == ('/img/' + file)){
+                data = base64_encode(__dirname + '/img/' + file)
+                results.push(data);
+              }
+            })
+          })
+          }
+          
         
-      }
-      }
+        
+    
+        if(1 == 2){
+        data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
+           //console.log(data);
+           response.render('pages/db', {results: data }); 
+        }else{
+           //response.render('pages/db', {results: result.rows });
+            //data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
+          //response.render('pages/db', {base64: data });
+          response.render('pages/db', {base64Array: results });
+          
+        }
+      })
        
-    });
+    };
   });
 });
 
@@ -81,16 +97,14 @@ app.post('/api/Upload', function(req, res){
 function decodeBase64Image(dataString) {
   var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
     response = {};
-
   if (matches.length !== 3) {
     return new Error('Invalid input string');
   }
-
   response.type = matches[1];
   response.data = new Buffer(matches[2], 'base64');
-
   return response;
 }
+
 function base64_encode(file) {
     // read binary data
     var bitmap = fs.readFileSync(file);
