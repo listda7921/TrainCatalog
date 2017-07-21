@@ -38,7 +38,7 @@ app.get('/db', function (request, response) {
       //   }
       // })
       //data = base64_encode("/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
-      response.render('pages/db', {results: {url: '/test'} }); 
+      response.render('pages/db', {results: result.rows }); 
       }
        
     });
