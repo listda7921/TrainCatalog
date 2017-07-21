@@ -17,8 +17,23 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-  // var data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg")
-  // console.log(data);
+ fs.readdir(__dirname + '/img', function( err, files ) {
+ if(err){
+   console.log(err);
+ }
+ else{
+   files.forEach(function(file){
+     if('/img/'+ file == '/img/032f0770-6dc8-11e7-be82-59533fcdbf61.jpg'){
+        console.log('/img/' + file);  
+        var data = base64_encode(__dirname + '/img/' + file);
+        console.log(data);
+     }
+    
+   })
+   
+ }
+   
+ });
   response.render('pages/index');
 });
 
@@ -35,27 +50,53 @@ app.get('/db', function (request, response) {
       if (err)
        { console.error(err); response.send("Error " + err); }
       else{
-        fs.readdir(__dirname + '/img', function( err, files ) {
-          if( err ) {
-              console.error( "Could not list the directory.", err );
-              process.exit( 1 );
-          } 
-          else{
-          files.forEach( function( file, index ) {
-            result.forEach(function(r){
-              if(r.url  == ('/img/' + file)){
-                data = base64_encode(__dirname + '/img/' + file);
-                results.push(data);
-              }
-            });
-          });
-          }
+      //   fs.readdir(__dirname + '/img', function( err, files ) {
+      //     if( err ) {
+      //         console.error( "Could not list the directory.", err );
+      //         process.exit( 1 );
+      //     } 
+      //     else{
+      //     files.forEach( function( file, index ) {
+      //       result.forEach(function(r){
+      //         if(r.url  == ('/img/' + file)){
+      //           data = base64_encode(__dirname + '/img/' + file);
+      //           results.push(data);
+      //         }
+      //       });
+      //     });
+      //     }
      
-          response.render('pages/db', {base64Array: results });
+      //     response.render('pages/db', {base64Array: results });
    
-      });
+      // });
+      
+      
+      
+      //test
+      fs.readdir(__dirname + '/img', function( err, files ) {
+       if(err){
+         console.log(err);
+       }
+       else{
+         files.forEach(function(file){
+           result.forEach(function(r){
+            if(r == '/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg'){
+              console.log('/img/' + file);  
+              data = base64_encode(__dirname + '/img/' + file);
+              console.log(data);
+            }  
+           })
+           
+          
+         })
+         
+       }
+         
+       });
+      
+      
         //data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
-        //response.render('pages/db', {base64: data });
+        response.render('pages/db', {base64: data });
     }
   });
 });
@@ -69,7 +110,7 @@ app.post('/api/Upload', function(req, res){
     console.log(err);
   });
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      var query = "INSERT INTO image_locations(url) VALUES('" + path + "')"
+      var query = "INSERT INTO image_locations(url) VALUES('" + path + "')";
     client.query(query, function(err, result) {
       done();
       if (err)
@@ -80,7 +121,7 @@ app.post('/api/Upload', function(req, res){
     }
   });
   res.send("ok");
-})
+});
 
 
 
