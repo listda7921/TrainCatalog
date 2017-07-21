@@ -35,27 +35,27 @@ app.get('/db', function (request, response) {
       if (err)
        { console.error(err); response.send("Error " + err); }
       else{
-      //   fs.readdir(__dirname + '/img', function( err, files ) {
-      //     if( err ) {
-      //         console.error( "Could not list the directory.", err );
-      //         process.exit( 1 );
-      //     } 
-      //     else{
-      //     files.forEach( function( file, index ) {
-      //       result.forEach(function(r){
-      //         if(r.url  == ('/img/' + file)){
-      //           data = base64_encode(__dirname + '/img/' + file)
-      //           results.push(data);
-      //         }
-      //       })
-      //     })
-      //     }
+        fs.readdir(__dirname + '/img', function( err, files ) {
+          if( err ) {
+              console.error( "Could not list the directory.", err );
+              process.exit( 1 );
+          } 
+          else{
+          files.forEach( function( file, index ) {
+            result.forEach(function(r){
+              if(r.url  == ('/img/' + file)){
+                data = base64_encode(__dirname + '/img/' + file);
+                results.push(data);
+              }
+            });
+          });
+          }
      
-      //     response.render('pages/db', {base64Array: results });
+          response.render('pages/db', {base64Array: results });
    
-      // })
-        data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
-        response.render('pages/db', {base64: data });
+      });
+        //data = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
+        //response.render('pages/db', {base64: data });
     }
   });
 });
