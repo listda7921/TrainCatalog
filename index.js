@@ -39,7 +39,8 @@ app.get('/db', function (request, response) {
 app.post('/api/Upload', function(req, res){
   var img = decodeBase64Image(req.body.base64String);
   var fileName = uuid.v1();
-  fs.writeFile(__dirname + '/img/' + fileName + '.jpg', img.data, function(err) {
+  var path = '/img/' + fileName + '.jpg';
+  fs.writeFile(__dirname + path, img.data, function(err) {
     console.log(err);
   });
   res.send("ok");
