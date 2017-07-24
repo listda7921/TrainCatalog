@@ -82,7 +82,7 @@ app.post('/api/Upload', function(req, res){
   var fileName = uuid.v1();
   var path = '/img/' + fileName + '.jpg';
   fs.writeFile(__dirname + path, img.data, function(err) {
-    console.log(err);
+    console.log('Error '+ err);
   });
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       var query = "INSERT INTO image_locations(url) VALUES('" + path + "')";
@@ -92,7 +92,7 @@ app.post('/api/Upload', function(req, res){
        { console.error(err); res.send("Error " + err); }
     });
     if(err){
-      console.log(err);
+      console.log('Error ' + err);
       res.send('Error ' + err);
     }
   });
