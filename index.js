@@ -47,6 +47,7 @@ app.get('/db', function (request, response) {
       done();
       var data;
       var results = [];
+      var test;
       if (err)
        { console.error(err); response.send("Error " + err); }
       else{
@@ -76,7 +77,7 @@ app.get('/db', function (request, response) {
       fs.readdir(__dirname + '/img', function( err, files ) {
         
         results.push("test");
-        results = files;
+        test = files;
       if(err){
         console.log(err);
        // results.push(err);
@@ -101,9 +102,9 @@ app.get('/db', function (request, response) {
       });
       
       var res = result.rows[0].url;
-        resData = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
+        var resData = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
         //response.render('pages/db', {base64: data , results: results});
-        response.send({base64: resData , results: results});
+        response.send({base64: resData , results: results, testvar: test});
     }
   });
 });
