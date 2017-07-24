@@ -108,7 +108,7 @@ app.get('/db', function (request, response) {
             if(r.url == '/img/' + file){
               console.log('/img/' + file);
               data = base64_encode(__dirname + '/img/' + file);
-              results.push(r,url);
+              results.push(r.url);
             }
       });
       });
