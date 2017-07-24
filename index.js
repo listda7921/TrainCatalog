@@ -48,7 +48,7 @@ app.get('/db', function (request, response) {
       var data;
       var results = [];
       if (err)
-       { console.error(err); response.send("Error " + err); results.push(err);}
+       { console.error(err); response.send("Error " + err); }
       else{
       //   fs.readdir(__dirname + '/img', function( err, files ) {
       //     if( err ) {
@@ -76,7 +76,7 @@ app.get('/db', function (request, response) {
       fs.readdir(__dirname + '/img', function( err, files ) {
         
         results.push("test");
-        results.push(files);
+        results = files;
       if(err){
         console.log(err);
        // results.push(err);
