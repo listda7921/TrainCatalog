@@ -43,82 +43,37 @@ app.listen(app.get('port'), function() {
 
 app.get('/db', function (request, response) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    if(err){
+      response.send('Error ' + err);
+    }
+    else{
     client.query('SELECT * FROM image_locations', function(err, result) {
       done();
       var data;
       var results = [];
       var files = [];
+      var urls = [];
       var res = result.rows;
       if (err)
        { console.error(err); response.send("Error " + err); }
       else{
-      //   fs.readdir(__dirname + '/img', function( err, files ) {
-      //     if( err ) {
-      //         console.error( "Could not list the directory.", err );
-      //         process.exit( 1 );
-      //     } 
-      //     else{
-      //     files.forEach( function( file, index ) {
-      //       result.forEach(function(r){
-      //         if(r.url  == ('/img/' + file)){
-      //           data = base64_encode(__dirname + '/img/' + file);
-      //           results.push(data);
-      //         }
-      //       });
-      //     });
-      //     }
-     
-      //     response.render('pages/db', {base64Array: results });
-   
-      // });
+        fs.readdirSync('./img/').forEach(file => {
+            files.push(file);
+            res.forEach(function(r){
+              if(r.url == '/img/' + file){
+                console.log('/img/' + file);
+                data = base64_encode(__dirname + '/img/' + file);
+                urls.push(r.url);
+                results.push('data:image/jpeg;base64,' + data);
+              }
+            });
+        });
       
-      
-      
-      //test
-      // fs.readdir('./img/', function( err, files ) {
-      //   path = __dirname;
-      //   results.push("test");
-      //   test = files[0];
-      // if(err){
-      //   console.log(err);
-      // // results.push(err);
-      // }
-      // else{
-      //   var res = result.rows;
-      //   files.forEach(function(file){
-      //     //res.forEach(function(r){
-      //       //if(r == '/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg'){
-      //         console.log('/img/' + file);
-      //         data = base64_encode(__dirname + '/img/' + file);
-      //         results.push('/img/' + file);
-      //         console.log(data);
-      //     // }  
-      //   // })
-           
-          
-      //   })
-         
-      // }
-         
-      // });
-      fs.readdirSync('./img/').forEach(file => {
-        files.push(file);
-          res.forEach(function(r){
-            if(r.url == '/img/' + file){
-              console.log('/img/' + file);
-              data = base64_encode(__dirname + '/img/' + file);
-              results.push(r.url);
-            }
-      });
-      });
-      
-       
-      //var res = result.rows[0].url;
-        var resData = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
-        //response.render('pages/db', {base64: data , results: results});
-        response.send({results: results, dbResults: res, folderResults: files});
+        //var resData = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
+        response.send({results: results, dbResults: res, folderResults: files, urls: urls});
     }
   });
+  }
 });
 });
 
@@ -138,6 +93,7 @@ app.post('/api/Upload', function(req, res){
     });
     if(err){
       console.log(err);
+      res.send('Error ' + err);
     }
   });
   res.send("ok");
