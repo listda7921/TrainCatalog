@@ -81,7 +81,7 @@ app.post('/api/Upload', function(req, res){
   var img = decodeBase64Image(req.body.base64String);
   var fileName = uuid.v1();
   var path = '/img/' + fileName + '.jpg';
-  fs.writeFile(path, img.data, function(err) {
+  fs.writeFile(__dirname + path, img.data, function(err) {
     console.log('Write file Error '+ err);
   });
   //var file = fs.readFile(path);
