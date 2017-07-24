@@ -84,8 +84,7 @@ app.post('/api/Upload', function(req, res){
   fs.writeFile(__dirname + path, img.data, function(err) {
     console.log('Error '+ err);
   });
-  var pool = new pg.Pool();
-    pool.connect(function(err, client, done) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       var query = "INSERT INTO image_locations(url) VALUES('" + path + "')";
     client.query(query, function(err, result) {
       done();
@@ -97,7 +96,6 @@ app.post('/api/Upload', function(req, res){
       res.send('Error ' + err);
     }
   });
-  pool.end();
   res.send("ok");
 });
 
