@@ -74,9 +74,12 @@ app.get('/db', function (request, response) {
       
       //test
       fs.readdir(__dirname + '/img', function( err, files ) {
+        
+        results.push("test");
+        results.push(files);
       if(err){
         console.log(err);
-        results.push(err);
+       // results.push(err);
       }
       else{
         var res = result.rows;
