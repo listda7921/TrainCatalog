@@ -85,6 +85,8 @@ app.post('/api/Upload', function(req, res){
     console.log('Error '+ err);
   });
   var file = fs.readFile(path);
+  console.log('dir ' + __dirname);
+  console.log('path ' + path);
   console.log('file ' + file);
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       var query = "INSERT INTO image_locations(url) VALUES('" + path + "')";
