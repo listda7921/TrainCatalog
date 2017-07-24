@@ -82,7 +82,7 @@ app.post('/api/Upload', function(req, res){
   var fileName = uuid.v1();
   var path = '/img/' + fileName + '.jpg';
   fs.writeFile(__dirname + path, img.data, function(err) {
-    console.log('Error '+ err);
+    console.log('Write file Error '+ err);
   });
   //var file = fs.readFile(path);
   console.log('dir ' + __dirname);
