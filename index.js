@@ -80,13 +80,14 @@ app.get('/db', function (request, response) {
 app.post('/api/Upload', function(req, res){
   var img = decodeBase64Image(req.body.base64String);
   var fileName = uuid.v1();
-  var path = './img/' + fileName + '.jpg';
-  fs.writeFile(path, img.data, function(err) {
+  var path = '/img/' + fileName + '.jpg';
+  fs.writeFile(__dirname + path, img.data, function(err) {
     console.log('Write file Error '+ err);
   });
   //var file = fs.readFile(path);
   console.log('dir ' + __dirname);
   console.log('path ' + path);
+  console.log('img ' + typeof img.data);
   fs.readdirSync('./img/').forEach(file=> {console.log('file ' + file);});
   //console.log('file ' + file);
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
