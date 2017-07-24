@@ -92,11 +92,12 @@ app.post('/api/Upload', function(req, res){
       if (err)
        { console.error(err); res.send("Error " + err); }
     });
-    if(err){
-      console.log('Error ' + err);
-      res.send('Error ' + err);
-    }
+    // if(err){
+    //   console.log('Error ' + err);
+    //   res.send('Error ' + err);
+    // }
   });
+  console.log('ok');
   res.send("ok");
 });
 
