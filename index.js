@@ -49,6 +49,7 @@ app.get('/db', function (request, response) {
       var results = [];
       var test;
       var path;
+      var res = result.rows;
       if (err)
        { console.error(err); response.send("Error " + err); }
       else{
@@ -102,11 +103,18 @@ app.get('/db', function (request, response) {
          
       // });
       fs.readdirSync('./img/').forEach(file => {
-        results.push(file);
-      })
+        //results.push(file);
+          res.forEach(function(r){
+            if(r == '/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg'){
+              console.log('/img/' + file);
+              data = base64_encode(__dirname + '/img/' + file);
+              results.push(data);
+            }
+      });
+      });
       
        
-      var res = result.rows[0].url;
+      //var res = result.rows[0].url;
         var resData = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
         //response.render('pages/db', {base64: data , results: results});
         response.send({base64: res , results: results, test: test, another: 'hello world', path: path});
