@@ -47,8 +47,7 @@ app.get('/db', function (request, response) {
       done();
       var data;
       var results = [];
-      var test;
-      var path;
+      var files = [];
       var res = result.rows;
       if (err)
        { console.error(err); response.send("Error " + err); }
@@ -103,7 +102,7 @@ app.get('/db', function (request, response) {
          
       // });
       fs.readdirSync('./img/').forEach(file => {
-        //results.push(file);
+        files.push(file);
           res.forEach(function(r){
             if(r.url == '/img/' + file){
               console.log('/img/' + file);
@@ -117,7 +116,7 @@ app.get('/db', function (request, response) {
       //var res = result.rows[0].url;
         var resData = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
         //response.render('pages/db', {base64: data , results: results});
-        response.send({results: results});
+        response.send({results: results, dbResults: res, folderResults: files});
     }
   });
 });
