@@ -75,7 +75,7 @@ app.get('/db', function (request, response) {
       
       
       //test
-      fs.readdir(__dirname + '/img/', function( err, files ) {
+      fs.readdir('/img/', function( err, files ) {
         path = __dirname;
         results.push("test");
         test = files[0];
