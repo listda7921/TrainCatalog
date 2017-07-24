@@ -104,7 +104,7 @@ app.get('/db', function (request, response) {
       var res = result.rows[0].url;
         var resData = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
         //response.render('pages/db', {base64: data , results: results});
-        response.send({base64: res , results: results, testvar: test});
+        response.send({base64: res , results: results, test: test, another: 'hello world'});
     }
   });
 });
