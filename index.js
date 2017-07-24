@@ -75,33 +75,37 @@ app.get('/db', function (request, response) {
       
       
       //test
-      fs.readdir('/img/', function( err, files ) {
-        path = __dirname;
-        results.push("test");
-        test = files[0];
-      if(err){
-        console.log(err);
-       // results.push(err);
-      }
-      else{
-        var res = result.rows;
-        files.forEach(function(file){
-          //res.forEach(function(r){
-            //if(r == '/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg'){
-              console.log('/img/' + file);
-              data = base64_encode(__dirname + '/img/' + file);
-              results.push('/img/' + file);
-              console.log(data);
-           // }  
-         // })
+      // fs.readdir('./img/', function( err, files ) {
+      //   path = __dirname;
+      //   results.push("test");
+      //   test = files[0];
+      // if(err){
+      //   console.log(err);
+      // // results.push(err);
+      // }
+      // else{
+      //   var res = result.rows;
+      //   files.forEach(function(file){
+      //     //res.forEach(function(r){
+      //       //if(r == '/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg'){
+      //         console.log('/img/' + file);
+      //         data = base64_encode(__dirname + '/img/' + file);
+      //         results.push('/img/' + file);
+      //         console.log(data);
+      //     // }  
+      //   // })
            
           
-        })
+      //   })
          
-      }
+      // }
          
-      });
+      // });
+      fs.readdirSync('./img/').forEach(file => {
+        results.push(file);
+      })
       
+       
       var res = result.rows[0].url;
         var resData = base64_encode(__dirname + "/img/6c5f4840-6dc8-11e7-be82-59533fcdbf61.jpg");
         //response.render('pages/db', {base64: data , results: results});
